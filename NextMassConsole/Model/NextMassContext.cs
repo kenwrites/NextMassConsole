@@ -10,7 +10,6 @@ namespace NextMassConsole.Model
     {
         DbSet<Church> Churches { get; set; }
         DbSet<User> Users { get; set; }
-        DbSet<MassTime> MassTimes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,10 +18,39 @@ namespace NextMassConsole.Model
             ConfigFile configuration = config.ReadConfigFile("config.json");
             SqlConnectionStringBuilder sBuilder = new SqlConnectionStringBuilder();
             sBuilder.DataSource = configuration.BaseConnectionString;
+            sBuilder.InitialCatalog = "NextMassConsole";
             sBuilder.Password = configuration.Password;
             sBuilder.UserID = configuration.UserName;
 
             optionsBuilder.UseSqlServer(sBuilder.ConnectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            // Set up the many-to-many relationship between Churches and Users
+
+            builder.Entity<ChurchUser>()
+                .HasKey(cu => new { cu.ChurchId, cu.UserId });
+
+            builder.Entity<ChurchUser>()
+                .HasOne(cu => cu.User)
+                .WithMany(u => u.FavoriteChurches)
+                .HasForeignKey(cu => cu.UserId);
+
+            builder.Entity<ChurchUser>()
+                .HasOne(cu => cu.Church)
+                .WithMany(c => c.FavoritedBy)
+                .HasForeignKey(cu => cu.ChurchId);
+
+            //builder.Entity<Church>()
+            //    .OwnsMany(c => c.MassTimes, m =>
+            //    {
+            //        m.HasForeignKey("ChurchId");
+            //        m.Property<int>("Id");
+            //        m.HasKey("ChurchId", "Id");
+            //    });
+                
+
         }
     }
 }
