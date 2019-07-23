@@ -8,8 +8,8 @@ namespace NextMassConsole.Model
 {
     class NextMassContext : DbContext
     {
-        DbSet<Church> Churches { get; set; }
-        DbSet<User> Users { get; set; }
+        public DbSet<Church> Churches { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,16 +40,7 @@ namespace NextMassConsole.Model
             builder.Entity<ChurchUser>()
                 .HasOne(cu => cu.Church)
                 .WithMany(c => c.FavoritedBy)
-                .HasForeignKey(cu => cu.ChurchId);
-
-            //builder.Entity<Church>()
-            //    .OwnsMany(c => c.MassTimes, m =>
-            //    {
-            //        m.HasForeignKey("ChurchId");
-            //        m.Property<int>("Id");
-            //        m.HasKey("ChurchId", "Id");
-            //    });
-                
+                .HasForeignKey(cu => cu.ChurchId);               
 
         }
     }

@@ -2,7 +2,7 @@
 {
     public interface ILocation
     {
-        string Lattitude { get; set; }
-        string Longitude { get; set; }
+        double Lattitude { get; set; }
+        double Longitude { get; set; }
     }
 }
