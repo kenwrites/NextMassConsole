@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NextMassConsole.Model
 {
-    public class User
+    public class User : IUser
     {
         public int Id { get; set; }
         public Location DefaultLocation { get; set; }

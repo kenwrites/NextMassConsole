@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace NextMassConsole.Model
 {
     [Owned]
-    public class MassTime
+    public class MassTime : IMassTime
     {
         [Key]
         public int Id { get; set; }

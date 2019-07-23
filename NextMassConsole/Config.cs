@@ -6,7 +6,7 @@ using System.Text;
 
 namespace NextMassConsole
 {
-    public class Config
+    public class Config : IConfig
     {
         DirectoryInfo _directory = new DirectoryInfo(Directory.GetCurrentDirectory());
         JsonSerializer _serializer = new JsonSerializer();
@@ -25,7 +25,7 @@ namespace NextMassConsole
         public ConfigFile ReadConfigFile(string filename)
         {
             string filePath = Path.Combine(_directory.FullName, filename);
-            
+
             using (StreamReader reader = new StreamReader(filePath))
             using (JsonTextReader jsonReader = new JsonTextReader(reader))
             {
@@ -33,12 +33,5 @@ namespace NextMassConsole
             }
         }
 
-    }
-
-    public class ConfigFile
-    {
-        public string BaseConnectionString { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
     }
 }

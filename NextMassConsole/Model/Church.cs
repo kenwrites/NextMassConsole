@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NextMassConsole.Model
 {
-    public class Church
+    public class Church : IChurch
     {
         public int Id { get; set; }
         [Required]
