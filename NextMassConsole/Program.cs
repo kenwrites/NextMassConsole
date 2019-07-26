@@ -7,8 +7,7 @@ namespace NextMassConsole
         static void Main(string[] args)
         {
 
-            Console.ReadKey(true);
-            
+            Console.ReadKey(true);         
             
 
         }

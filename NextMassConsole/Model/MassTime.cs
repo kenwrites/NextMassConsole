@@ -7,7 +7,10 @@ namespace NextMassConsole.Model
 {
     [Owned]
     public class MassTime : IMassTime
-    {
+    {        
+        public MassTime()
+        {
+        }
         public MassTime(DayOfWeek day, int hour, int minute, IChurch church)
         {
             this.Day = day;
