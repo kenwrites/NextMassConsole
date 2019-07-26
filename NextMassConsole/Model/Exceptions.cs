@@ -8,8 +8,12 @@ namespace NextMassConsole.Model
     {
         public InvalidLatOrLongException(string message) : base(message)
         {
-            
-
+        }
+    }
+    public class InvalidTimeException : Exception
+    {
+        public InvalidTimeException(string message) : base(message)
+        {
         }
     }
 }
