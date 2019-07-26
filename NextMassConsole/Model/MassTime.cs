@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,10 +8,11 @@ namespace NextMassConsole.Model
     [Owned]
     public class MassTime : IMassTime
     {
+        
         [Key]
         public int Id { get; set; }
         [Required]
-        public int Day { get; set; }
+        public DayOfWeek Day { get; set; }
         [Required]
         public int Hour { get; set; }
         [Required]

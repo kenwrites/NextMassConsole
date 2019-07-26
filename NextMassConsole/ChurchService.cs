@@ -40,5 +40,9 @@ namespace NextMassConsole.Model
             //_db.Churches.
             return new List<Church>();
         }
+        public void SaveChanges()
+        {
+            //_db.SaveChanges();
+        }
     }
 }

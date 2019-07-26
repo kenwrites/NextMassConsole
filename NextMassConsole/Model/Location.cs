@@ -10,6 +10,11 @@ namespace NextMassConsole.Model
         public Location()
         {
         }
+        public Location(double latitude, double longitude)
+        {
+            this.Latitude = latitude;
+            this.Longitude = longitude;
+        }
         public Location(ILocation location)
         {
             this.Latitude = location.Latitude;

@@ -5,7 +5,7 @@ namespace NextMassConsole.Model
     public interface IChurch
     {
 
-        Location Location { get; set; }
+        Location Coordinates { get; set; }
         List<MassTime> MassTimes { get; set; }
     }
 }

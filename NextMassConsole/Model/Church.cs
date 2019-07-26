@@ -12,12 +12,12 @@ namespace NextMassConsole.Model
 
         public Church(IChurch church)
         {
-            this.Location = church.Location;
+            this.Coordinates = church.Coordinates;
             this.MassTimes = church.MassTimes;
         }
         public int Id { get; set; }
         [Required]
-        public Location Location { get; set; }
+        public Location Coordinates { get; set; }
         public List<MassTime> MassTimes { get; set; }
         public List<ChurchUser> FavoritedBy { get; set; }
     }
