@@ -1,22 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NextMassConsole.Model
 {
     [Owned]
     public class Location : ILocation
     {
+        public Location()
+        {
+        }
         public Location(ILocation location)
         {
-            this.Lattitude = location.Lattitude;
+            this.Latitude = location.Latitude;
             this.Longitude = location.Longitude;
         }
 
-        public Location(string lattitude, string longitude)
+        public Location(string latitude, string longitude)
         {
             // check if can parse
             double parsedLat = 0.0;
-            bool LatIsValid = double.TryParse(lattitude, out parsedLat);
+            bool LatIsValid = double.TryParse(latitude, out parsedLat);
 
             // check if in range
             LatIsValid =
@@ -24,14 +28,14 @@ namespace NextMassConsole.Model
 
             if (LatIsValid)
             {
-                this.Lattitude = parsedLat;
+                this.Latitude = parsedLat;
             }
             else
             {
-                throw new InvalidLatOrLongException($"Lattitude {lattitude} could not be parsed by double.TryParse.");
+                throw new InvalidLatOrLongException($"Latitude {latitude} could not be parsed by double.TryParse.");
             }
 
-            
+
             double parsedLong = 0.0;
             bool LongIsValid = double.TryParse(longitude, out parsedLong);
 
@@ -49,7 +53,7 @@ namespace NextMassConsole.Model
 
         public int Id { get; set; }
         [Required]
-        public double Lattitude { get; set; }
+        public double Latitude { get; set; }
         [Required]
         public double Longitude { get; set; }
     }

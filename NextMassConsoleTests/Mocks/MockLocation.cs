@@ -7,7 +7,7 @@ namespace NextMassConsoleTests.Mocks
 {
     class MockLocation : ILocation
     {
-        public double Lattitude { get ; set; }
+        public double Latitude { get ; set; }
         public double Longitude { get; set; }
     }
 }

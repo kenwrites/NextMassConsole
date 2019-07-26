@@ -40,7 +40,9 @@ namespace NextMassConsole.Model
             builder.Entity<ChurchUser>()
                 .HasOne(cu => cu.Church)
                 .WithMany(c => c.FavoritedBy)
-                .HasForeignKey(cu => cu.ChurchId);               
+                .HasForeignKey(cu => cu.ChurchId);  
+            
+            
 
         }
     }

@@ -16,14 +16,14 @@ namespace NextMassConsoleTests
         public void LocationConstructor_ILocation_Test()
         {
             ILocation iLoc = new MockLocation();
-            iLoc.Lattitude = 89.22232;
+            iLoc.Latitude = 89.22232;
             iLoc.Longitude = 22.44322;
 
             Location newLocation = new Location(iLoc);
 
             Assert.Equal(
-                new { Lat = iLoc.Lattitude, Long = iLoc.Longitude },
-                new { Lat = newLocation.Lattitude, Long = newLocation.Longitude }
+                new { Lat = iLoc.Latitude, Long = iLoc.Longitude },
+                new { Lat = newLocation.Latitude, Long = newLocation.Longitude }
             );
         }
 
@@ -43,7 +43,7 @@ namespace NextMassConsoleTests
             double longAsDouble = double.Parse(lon);
 
             Assert.Equal(
-                new { Lat = newLoc.Lattitude, Long = newLoc.Longitude },
+                new { Lat = newLoc.Latitude, Long = newLoc.Longitude },
                 new { Lat = latAsDouble, Long = longAsDouble }
             );
         }

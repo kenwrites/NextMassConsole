@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NextMassConsole.Model;
 
 namespace NextMassConsole.Migrations
 {
     [DbContext(typeof(NextMassContext))]
-    partial class NextMassContextModelSnapshot : ModelSnapshot
+    [Migration("20190726123542_Convert lat and long to doubles")]
+    partial class Convertlatandlongtodoubles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,7 +89,7 @@ namespace NextMassConsole.Migrations
                                 .ValueGeneratedOnAdd()
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                            b1.Property<double>("Latitude");
+                            b1.Property<double>("Lattitude");
 
                             b1.Property<double>("Longitude");
 
@@ -123,7 +125,7 @@ namespace NextMassConsole.Migrations
                                 .ValueGeneratedOnAdd()
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                            b1.Property<double>("Latitude");
+                            b1.Property<double>("Lattitude");
 
                             b1.Property<double>("Longitude");
 

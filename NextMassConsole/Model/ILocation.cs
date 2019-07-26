@@ -2,7 +2,7 @@
 {
     public interface ILocation
     {
-        double Lattitude { get; set; }
+        double Latitude { get; set; }
         double Longitude { get; set; }
     }
 }

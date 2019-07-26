@@ -9,12 +9,12 @@ namespace NextMassConsole.Model
         private NextMassContext _db = new NextMassContext();
         public void AddChurch(IChurch church)
         {
-            _db.Churches.Add(new Church(church));
+            //_db.Churches.Add(new Church(church));
         }
         public void UpdateChurch(int churchId, IChurch updatedChurch)
         {
-            Church churchToUpdate = _db.Churches.Find(churchId);
-            churchToUpdate = new Church(updatedChurch);
+            //Church churchToUpdate = _db.Churches.Find(churchId);
+            //churchToUpdate = new Church(updatedChurch);
         }
         public void DeleteChurch(Church church)
         {
@@ -25,11 +25,11 @@ namespace NextMassConsole.Model
         }
         public IChurch GetChurch(string name)
         {
-            
+            return new Church();
         }
         public IChurch GetChurch(int Id)
         {
-
+            return new Church();
         }
         public ICollection<Church> GetNearbyChurches(ILocation location, int distanceInMiles = 10)
         {
@@ -37,7 +37,7 @@ namespace NextMassConsole.Model
         }
         public ICollection<Church> ReturnAllChurchesForTesting()
         {
-            _db.Churches.
+            //_db.Churches.
             return new List<Church>();
         }
     }

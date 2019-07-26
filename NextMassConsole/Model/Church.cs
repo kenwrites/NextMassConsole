@@ -6,6 +6,10 @@ namespace NextMassConsole.Model
 {
     public class Church : IChurch
     {
+        public Church()
+        {
+        }
+
         public Church(IChurch church)
         {
             this.Location = church.Location;
