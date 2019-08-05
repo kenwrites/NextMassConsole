@@ -173,8 +173,7 @@ namespace NextMassConsoleTests
         {
             AddSomeChurches();
             var actualListBefore = (List<Church>)_churchService.ReturnAllChurchesForTesting();
-            //var churchToDelete = actualListBefore.Find(c => c.Coordinates.)
-
+            var churchToDelete = actualListBefore.Find(c => c.Name == "Test2");
         }
 
         private void AddSomeChurches()
@@ -185,7 +184,7 @@ namespace NextMassConsoleTests
                 new MockMassTime { Day = DayOfWeek.Saturday, Hour = 5, Minute = 30 },
                 new MockMassTime { Day = DayOfWeek.Sunday, Hour = 7, Minute = 30 },
             };
-            var newChurch = new Church { Coordinates = churchLoc, MassTimes = massTimes };
+            var newChurch = new Church { Coordinates = churchLoc, MassTimes = massTimes, Name = "Test1" };
             _churchService.AddChurch(newChurch);
 
             churchLoc = new MockLocation { Latitude = 31.33223, Longitude = 62.4432234 };
@@ -194,7 +193,7 @@ namespace NextMassConsoleTests
                 new MockMassTime { Day = DayOfWeek.Saturday, Hour = 19, Minute = 30 },
                 new MockMassTime { Day = DayOfWeek.Sunday, Hour = 9, Minute = 00 },
             };
-            newChurch = new Church { Coordinates = churchLoc, MassTimes = massTimes };
+            newChurch = new Church { Coordinates = churchLoc, MassTimes = massTimes, Name = "Test2" };
             _churchService.AddChurch(newChurch);
 
             // identical church 1
@@ -204,7 +203,7 @@ namespace NextMassConsoleTests
                 new MockMassTime { Day = DayOfWeek.Saturday, Hour = 20, Minute = 30 },
                 new MockMassTime { Day = DayOfWeek.Sunday, Hour = 11, Minute = 00 },
             };
-            newChurch = new Church { Coordinates = churchLoc, MassTimes = massTimes };
+            newChurch = new Church { Coordinates = churchLoc, MassTimes = massTimes, Name = "TestIdenticalChurch" };
             _churchService.AddChurch(newChurch);
 
             // identical church 2
@@ -214,7 +213,7 @@ namespace NextMassConsoleTests
                 new MockMassTime { Day = DayOfWeek.Saturday, Hour = 20, Minute = 30 },
                 new MockMassTime { Day = DayOfWeek.Sunday, Hour = 11, Minute = 00 },
             };
-            newChurch = new Church { Coordinates = churchLoc, MassTimes = massTimes };
+            newChurch = new Church { Coordinates = churchLoc, MassTimes = massTimes, Name = "TestIdenticalChurch" };
             _churchService.AddChurch(newChurch);        
         }
 
