@@ -28,11 +28,13 @@ namespace NextMassConsoleTests
         }
 
         [Theory]
+        // Happy Path:
         [InlineData("23.23232", "41.223434")]
         [InlineData("0.1","0.1")]
         [InlineData("-23.34432","-44.44342")]
-        [InlineData("-90", "0")]
-        [InlineData("90", "0")]
+        // Edge Cases:
+        [InlineData("-90", "0")] 
+        [InlineData("90", "0")] 
         [InlineData("0", "-180")]
         [InlineData("0", "180")]
         public void LocationConstructor_GoodString_Test(string lat, string lon)
@@ -49,7 +51,9 @@ namespace NextMassConsoleTests
         }
 
         [Theory]
+        // Non-numerical input:
         [InlineData("abkd", "02.aa1")]
+        // Input out of range:
         [InlineData("-91", "0")]
         [InlineData("91","0")]
         [InlineData("0", "-181")]

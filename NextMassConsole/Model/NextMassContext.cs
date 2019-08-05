@@ -46,9 +46,6 @@ namespace NextMassConsole.Model
                 .HasOne(mt => (Church)mt.Church)
                 .WithMany(c => c.MassTimes)
                 .HasForeignKey(mt => mt.ChurchId);
-                
-                
-            
 
         }
     }

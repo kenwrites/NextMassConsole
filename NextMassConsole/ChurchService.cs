@@ -18,7 +18,7 @@ namespace NextMassConsole.Model
         }
         public void DeleteChurch(Church church)
         {
-            _db.Churches.Remove(church);
+            //_db.Churches.Remove(church);
         }
         public void DeleteChurch(int churchId)
         {
@@ -37,7 +37,6 @@ namespace NextMassConsole.Model
         }
         public ICollection<Church> ReturnAllChurchesForTesting()
         {
-            //_db.Churches.
             return new List<Church>();
         }
         public void SaveChanges()

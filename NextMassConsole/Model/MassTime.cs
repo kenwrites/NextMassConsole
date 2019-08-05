@@ -30,7 +30,7 @@ namespace NextMassConsole.Model
             }
             else
             {
-                throw new InvalidTimeException($"Minute input {minute} is not valid.  Enter a number between 0 and 23, inclusive.");
+                throw new InvalidTimeException($"Minute input {minute} is not valid.  Enter a number between 0 and 59, inclusive.");
             }
         }
         
@@ -54,6 +54,8 @@ namespace NextMassConsole.Model
         /// <returns>A DateTime which represents the next occurence of this regularly scheduled Mass.</returns>
         public DateTime GetNextMass(DateTime now)
         {
+            // TODO:  Refactor this method so that it uses a custom class to iterate through possible dates and times.  Using DateTime is inefficient and cumbersome, as the relevant fields on DateTime are read-only.  
+
             bool timeNotFound = true;
             DateTime dateToTest = now;
 
@@ -65,8 +67,6 @@ namespace NextMassConsole.Model
                     var daysToMass = (int)this.Day - (int)dateToTest.DayOfWeek;
                     dateToTest = ResetTimeValues(dateToTest);
                     dateToTest = dateToTest.AddDays(daysToMass);
-
-                    // TODO: figure out the difference, and advance that number of days
                 }
                 if (dateToTest.DayOfWeek == this.Day)
                 {
