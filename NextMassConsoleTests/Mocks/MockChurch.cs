@@ -7,9 +7,8 @@ namespace NextMassConsoleTests.Mocks
 {
     class MockChurch : IChurch
     {
+        public ILocation Coordinates { get; set; }
         // TODO:  update DbContext to handle interface
-        public Location Coordinates { get; set; }
-        // TODO:  update DbContext to handle interface
-        public List<MassTime> MassTimes { get; set; }
+        public ICollection<IMassTime> MassTimes { get; set; }
     }
 }

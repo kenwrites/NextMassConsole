@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace NextMassConsole.Model
@@ -42,10 +43,20 @@ namespace NextMassConsole.Model
                 .WithMany(c => c.FavoritedBy)
                 .HasForeignKey(cu => cu.ChurchId);
 
+            builder.Entity<Church>()
+                .OwnsMany(c => (List<MassTime>)c.MassTimes);
+
             builder.Entity<MassTime>()
                 .HasOne(mt => (Church)mt.Church)
-                .WithMany(c => c.MassTimes)
+                .WithMany(c => (List<MassTime>)c.MassTimes)
                 .HasForeignKey(mt => mt.ChurchId);
+
+            builder.Entity<Church>()
+                .OwnsOne(c => (Location)c.Coordinates);
+
+            
+
+
 
         }
     }

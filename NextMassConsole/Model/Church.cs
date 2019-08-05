@@ -17,8 +17,8 @@ namespace NextMassConsole.Model
         }
         public int Id { get; set; }
         [Required]
-        public Location Coordinates { get; set; }
-        public List<MassTime> MassTimes { get; set; }
+        public ILocation Coordinates { get; set; }
+        public ICollection<IMassTime> MassTimes { get; set; }
         public List<ChurchUser> FavoritedBy { get; set; }
     }
 }

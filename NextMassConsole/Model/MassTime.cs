@@ -11,6 +11,7 @@ namespace NextMassConsole.Model
         public MassTime()
         {
         }
+
         public MassTime(DayOfWeek day, int hour, int minute, IChurch church)
         {
             this.Day = day;

@@ -61,5 +61,6 @@ namespace NextMassConsole.Model
         public double Latitude { get; set; }
         [Required]
         public double Longitude { get; set; }
+
     }
 }
