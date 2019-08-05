@@ -148,7 +148,6 @@ namespace NextMassConsoleTests
             _churchService.DeleteChurch(churchToDelete);
 
             var actualListAfter = (List<Church>)_churchService.ReturnAllChurchesForTesting();
-
             Assert.True(actualListAfter.Count == actualListBefore.Count - 1 &&
                 !actualListAfter.Contains(churchToDelete));
         }
@@ -168,12 +167,22 @@ namespace NextMassConsoleTests
                 !actualListAfter.Contains(churchToDelete));
         }        
 
-        [Fact]
-        public void DeleteChurch_ChurchId_Test()
+        [Theory]
+        // Happy path
+        [InlineData("Test2")]
+        // Edge case: delete 1 of 2 duplicate churches
+        [InlineData("TestIdenticalChurch")]
+        public void DeleteChurch_ChurchId_Test(string churchName)
         {
             AddSomeChurches();
             var actualListBefore = (List<Church>)_churchService.ReturnAllChurchesForTesting();
-            var churchToDelete = actualListBefore.Find(c => c.Name == "Test2");
+            var churchToDelete = actualListBefore.Find(c => c.Name == churchName);
+
+            _churchService.DeleteChurch(churchToDelete.Id);
+
+            var actualListAfter = (List<Church>)_churchService.ReturnAllChurchesForTesting();
+            Assert.True(actualListAfter.Count == actualListBefore.Count - 1 &&
+                !actualListAfter.Contains(churchToDelete));
         }
 
         private void AddSomeChurches()
