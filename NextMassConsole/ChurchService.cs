@@ -35,9 +35,9 @@ namespace NextMassConsole.Model
         {
             return new List<Church>();
         }
-        public ICollection<Church> ReturnAllChurchesForTesting()
+        public ICollection<IChurch> ReturnAllChurchesForTesting()
         {
-            return new List<Church>();
+            return (ICollection<IChurch>) new List<Church>();
         }
         public void SaveChanges()
         {

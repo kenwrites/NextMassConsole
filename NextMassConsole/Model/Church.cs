@@ -16,6 +16,7 @@ namespace NextMassConsole.Model
             this.MassTimes = church.MassTimes;
         }
         public int Id { get; set; }
+
         [Required]
         public ILocation Coordinates { get; set; }
         public ICollection<IMassTime> MassTimes { get; set; }
