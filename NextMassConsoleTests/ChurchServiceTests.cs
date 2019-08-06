@@ -185,6 +185,40 @@ namespace NextMassConsoleTests
                 !actualListAfter.Contains(churchToDelete));
         }
 
+        [Theory]
+        // Happy Path
+        [InlineData("Test1")]
+        [InlineData("Test2")]
+        // Edge Case:  duplicate churches
+        [InlineData("TestIdenticalChurch")]
+        public void GetChurch_ByName_Tests(string churchName)
+        {
+            AddSomeChurches();
+            var actual = _churchService.GetChurch(churchName);
+
+            Assert.True(actual is IChurch &&
+                actual.Name == churchName);
+        }
+
+        [Theory]
+        // Happy Path
+        [InlineData("Test1")]
+        [InlineData("Test2")]
+        // Edge Case:  duplicate churches
+        [InlineData("TestIdenticalChurch")]
+        public void GetChurch_ById_Tests(string churchName)
+        {
+            AddSomeChurches();
+            var actualList = (List<Church>)_churchService.ReturnAllChurchesForTesting();
+            var expected = actualList.Find(c => c.Name == churchName);
+
+            var actual = (Church)_churchService.GetChurch(expected.Id);
+
+            Assert.True(actual is IChurch &&
+                actual.Id == expected.Id &&
+                actual.Name == expected.Name);
+        }
+
         private void AddSomeChurches()
         {
             var churchLoc = new MockLocation { Latitude = 21.85843, Longitude = 32.44373 };
