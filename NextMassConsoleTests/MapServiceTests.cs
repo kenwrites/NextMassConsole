@@ -30,11 +30,11 @@ namespace NextMassConsoleTests
         [InlineData(38.2149, -85.73362, 38.24786, -85.77374, 723)] // Clark Park to St. Augustine
         [InlineData(38.2518438, -85.757333, 38.25785, -85.72652, 415)] // 4th Street Live to St. Joseph
         [InlineData(38.2149, -85.73362, 38.25785, -85.72652, 758)] // Clark Park to St. Joseph
-        public void TravelTimeTests(double startLat, double startLong, double endLat, double endLong, int expectedTravelTime)
+        public async void TravelTimeTests(double startLat, double startLong, double endLat, double endLong, int expectedTravelTime)
         {
             var start = new Location { Latitude = startLat, Longitude = startLong };
             var end = new Location { Latitude = endLat, Longitude = endLong };
-            var actual = _mapService.TravelTime(start, end);
+            var actual = await _mapService.TravelTime(start, end);
 
             // Assert that actual is with 5% of expected time
             Assert.True(Math.Abs(actual - expectedTravelTime) < expectedTravelTime * .05);
