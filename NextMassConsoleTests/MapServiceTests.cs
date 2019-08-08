@@ -18,9 +18,9 @@ namespace NextMassConsoleTests
         [InlineData("1310 West Broadway, Louisville, KY 40203-2058", 38.24786, -85.77374)] // St. Augustine
         [InlineData("906 Ardmore Dr, Louisville, KY", 38.2149, -85.73362)] // Clark Park
         [InlineData("1406 E. Washington St., Louisville, KY 40206-1829", 38.25785, -85.72652)] // St. Joseph
-        public void LocateTests(string address, double expectedLat, double expectedLong)
+        public async void LocateTests(string address, double expectedLat, double expectedLong)
         {
-            var actual = _mapService.Locate(address);
+            var actual = await _mapService.Locate(address);
             Assert.Equal(actual.Latitude, expectedLat, 4);
             Assert.Equal(actual.Longitude, expectedLong, 4);
         }

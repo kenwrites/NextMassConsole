@@ -1,15 +1,69 @@
 ﻿using NextMassConsole.Model;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 
 namespace NextMassConsole
 {
     public class MapService
     {
-        public ILocation Locate(string address)
+        private static readonly HttpClient _http = new HttpClient();
+        private static readonly string _apiEndpoint = "https://geocoder.api.here.com/6.2/geocode.json?";
+        private string _baseURL;
+        private static JsonTools _jsonTools = new JsonTools();
+        private ConfigFile _configFile;
+        private JsonSerializer _serializer = new JsonSerializer();
+
+        private static string AddAPICredentials(string baseUrl, string appId, string appCode)
         {
-            return new Location();
+            return $"{baseUrl}app_id={appId}&app_code={appCode}";
+        }
+
+        public MapService()
+        {
+            _configFile = _jsonTools.ReadFile<ConfigFile>("config.json");
+            _baseURL = AddAPICredentials(_apiEndpoint, _configFile.HereAppId, _configFile.HereAppCode);
+        }
+
+        public async Task<ILocation> Locate(string address)
+        {
+            Uri requestUri = new Uri($"{_baseURL}&searchtext={address}");
+            string httpResponse = "";
+
+            try
+            {
+                httpResponse = await _http.GetStringAsync(requestUri);
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            byte[] responseAsBytes = Encoding.Default.GetBytes(httpResponse);
+            Stream stream = new MemoryStream(responseAsBytes);
+
+            var response = new GeoCodeResponse();            
+
+            using (StreamReader reader = new StreamReader(stream))
+            using (JsonTextReader jsonReader = new JsonTextReader(reader))
+            {
+                response = _serializer.Deserialize<GeoCodeResponse>(jsonReader);
+            }
+            var navPosition = response.Response.View
+                // View[] should only have one View, so take first View
+                .First(v => v is View)
+                .Result
+                // Get result with highest Relevance
+                .OrderByDescending(r => r.Relevance).First()
+                .Location.NavigationPosition.First();
+
+            return new Location { Latitude = navPosition.Latitude, Longitude = navPosition.Longitude };
         }
 
         /// <summary>
@@ -22,6 +76,8 @@ namespace NextMassConsole
         {
             return 0; 
         }
+
+        
 
     }
 }

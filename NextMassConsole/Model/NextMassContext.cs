@@ -15,11 +15,11 @@ namespace NextMassConsole.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Build SQL Server Connection String
-            Config config = new Config();
-            ConfigFile configuration = config.ReadConfigFile("config.json");
+            JsonTools jsonTools = new JsonTools();
+            ConfigFile configuration = jsonTools.ReadFile<ConfigFile>("config.json");
             SqlConnectionStringBuilder sBuilder = new SqlConnectionStringBuilder();
             sBuilder.DataSource = configuration.BaseConnectionString;
-            sBuilder.InitialCatalog = "NextMassConsole";
+            sBuilder.InitialCatalog = configuration.InitialCatalog;
             sBuilder.Password = configuration.Password;
             sBuilder.UserID = configuration.UserName;
 
@@ -53,11 +53,6 @@ namespace NextMassConsole.Model
 
             builder.Entity<Church>()
                 .OwnsOne(c => (Location)c.Coordinates);
-
-            
-
-
-
         }
     }
 }
