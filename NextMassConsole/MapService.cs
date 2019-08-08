@@ -31,6 +31,11 @@ namespace NextMassConsole
             _baseURL = AddAPICredentials(_apiEndpoint, _configFile.HereAppId, _configFile.HereAppCode);
         }
 
+        /// <summary>
+        /// Returns latitude and longitude for a given address as an ILocation object.
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
         public async Task<ILocation> Locate(string address)
         {
             Uri requestUri = new Uri($"{_baseURL}&searchtext={address}");
@@ -45,16 +50,8 @@ namespace NextMassConsole
                 Console.WriteLine(ex.Message);
             }
 
-            byte[] responseAsBytes = Encoding.Default.GetBytes(httpResponse);
-            Stream stream = new MemoryStream(responseAsBytes);
+            var response = _jsonTools.ReadString<GeoCodeResponse>(httpResponse, Encoding.Default);           
 
-            var response = new GeoCodeResponse();            
-
-            using (StreamReader reader = new StreamReader(stream))
-            using (JsonTextReader jsonReader = new JsonTextReader(reader))
-            {
-                response = _serializer.Deserialize<GeoCodeResponse>(jsonReader);
-            }
             var navPosition = response.Response.View
                 // View[] should only have one View, so take first View
                 .First(v => v is View)
